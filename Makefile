@@ -3,10 +3,16 @@ var_m = tewi2a-medium-11.bdf tewihm-medium-11.bdf tewii-medium-11.bdf
 var_b = tewi2a-bold-11.bdf tewihm-bold-11.bdf tewii-bold-11.bdf
 var = $(var_m) $(var_b)
 pcf = $(bdf:%.bdf=out/%.pcf.gz)
+otb = $(bdf:%.bdf=out/%.otb)
 cache = out/fonts.dir out/fonts.scale
 unicode_version = 9.0.0
 
-all: $(pcf)
+all: $(pcf) otb
+
+pcf: $(pcf)
+
+otb: $(bdf) out
+	scripts/opentype-bitmap.py -o out $(bdf)
 
 var: $(var)
 
